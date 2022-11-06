@@ -1,10 +1,14 @@
-import { arrayLength, arrayPush } from './array-functions';
+import { arrayLength, arrayPush, arrayPop } from './array-functions';
 
 describe('Given arrayLength function', () => {
     const arrCase = [
         [[3, 8, 5, 6], 4],
         [[], 0],
         [['1'], 1],
+        [[2, undefined, 3], 3],
+        [[null], 1],
+        [[NaN], 1],
+        [[{}], 1],
     ];
     test.each(arrCase)(`The result of %p should be %i`, (arr, expected) => {
         const result = arrayLength(arr);
@@ -25,4 +29,19 @@ describe('Given arrayPush function', () => {
             expect(result).toStrictEqual(expected);
         }
     );
+});
+
+describe('Given arrayPop function', () => {
+    const arrCase = [
+        [
+            [3, 8, 5, 6],
+            [3, 8, 5],
+        ],
+        [[], undefined],
+        [['1'], undefined],
+    ];
+    test.each(arrCase)(`The result of %p should be %p`, (arr, expected) => {
+        const result = arrayPop(arr);
+        expect(result).toStrictEqual(expected);
+    });
 });

@@ -5,3 +5,8 @@ export const arrayLength = (arr) => {
     }
     return length;
 };
+
+export const arrayPush = (originaArr, newElement) => {
+    originaArr[arrayLength(originaArr)] = newElement;
+    return originaArr
+};

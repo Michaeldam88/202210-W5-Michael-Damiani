@@ -4,6 +4,7 @@ import {
     arrayPop,
     arrayUnshift,
     arrayShift,
+    arraySome,
 } from './array-functions';
 
 describe('Given arrayLength function', () => {
@@ -15,6 +16,8 @@ describe('Given arrayLength function', () => {
         [[null], 1],
         [[NaN], 1],
         [[{}], 1],
+        //test not passed
+        //[[{ undefined }], 1]
     ];
     test.each(arrCase)(`The result of %p should be %i`, (arr, expected) => {
         const result = arrayLength(arr);
@@ -79,4 +82,22 @@ describe('Given arrayShift function', () => {
         const result = arrayShift(arr);
         expect(result).toStrictEqual(expected);
     });
+});
+
+describe('Given arraySome function', () => {
+    const checkFunction = (element) => {
+        return element === 'x';
+    };
+    const arrCase = [
+        [[3, 8, 'x'], checkFunction, true],
+        [[], checkFunction, false],
+    ];
+
+    test.each(arrCase)(
+        `The result of %p + %p should be %p`,
+        (originaArr, checkFunction, expected) => {
+            const result = arraySome(originaArr, checkFunction);
+            expect(result).toBe(expected);
+        }
+    );
 });

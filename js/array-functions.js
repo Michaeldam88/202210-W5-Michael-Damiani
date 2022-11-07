@@ -16,8 +16,25 @@ export const arrayPush = (originaArr, newElement) => {
 
 export const arrayPop = (arr) => {
     const newArr = [];
-    if (arrayLength(arr) < 2) return undefined;
+    if (arrayLength(arr) < 1) return undefined;
     for (let i = 0; i < arrayLength(arr) - 1; i++) {
+        arrayPush(newArr, arr[i]);
+    }
+    return newArr;
+};
+
+export const arrayUnshift = (originaArr, newElement) => {
+    for (let i = arrayLength(originaArr) - 1; i >= 0; i--) {
+        originaArr[i + 1] = originaArr[i];
+    }
+    originaArr[0] = newElement;
+    return originaArr;
+};
+
+export const arrayShift = (arr) => {
+    const newArr = [];
+    if (arrayLength(arr) < 1) return undefined;
+    for (let i = 1; i < arrayLength(arr); i++) {
         arrayPush(newArr, arr[i]);
     }
     return newArr;

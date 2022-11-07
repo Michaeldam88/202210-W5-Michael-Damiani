@@ -91,6 +91,7 @@ describe('Given arraySome function', () => {
     const arrCase = [
         [[3, 8, 'x'], checkFunction, true],
         [[], checkFunction, false],
+        [[3, 5, 7], checkFunction, false],
     ];
 
     test.each(arrCase)(
@@ -100,4 +101,11 @@ describe('Given arraySome function', () => {
             expect(result).toBe(expected);
         }
     );
+
+    test(`The result of [3, 8, 'x'] + 3 should throw an error`, () => {
+        function checkFunction() {
+            arraySome([3, 8, 'x'], 3);
+        }
+        expect(checkFunction).toThrow();
+    });
 });

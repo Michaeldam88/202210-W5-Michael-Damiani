@@ -42,12 +42,8 @@ export const arrayShift = (arr) => {
 
 export const arraySome = (arr, valueToCheck) => {
     if (arrayLength(arr) < 1) return false;
-    try {
-        if (typeof valueToCheck !== 'function') {
-            test;
-        }
-    } catch (error) {
-        console.error(error);
+    if (typeof valueToCheck !== 'function') {
+        throw new Error(`ERROR: ${valueToCheck} is not a function`);
     }
 
     for (let i = 0; i < arrayLength(arr); i++) {

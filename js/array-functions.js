@@ -39,3 +39,15 @@ export const arrayShift = (arr) => {
     }
     return newArr;
 };
+
+export const arraySome = (arr, valueToCheck) => {
+    if (arrayLength(arr) < 1) return false;
+    if (typeof valueToCheck !== 'function') {
+        throw new Error(`ERROR: ${valueToCheck} is not a function`);
+    }
+
+    for (let i = 0; i < arrayLength(arr); i++) {
+        if (valueToCheck(arr[i])) return true;
+    }
+    return false;
+};

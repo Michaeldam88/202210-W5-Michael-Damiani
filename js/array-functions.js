@@ -16,7 +16,7 @@ export const arrayPush = (originaArr, newElement) => {
 
 export const arrayPop = (arr) => {
     const newArr = [];
-    if (arrayLength(arr) < 2) return undefined;
+    if (arrayLength(arr) < 1) return undefined;
     for (let i = 0; i < arrayLength(arr) - 1; i++) {
         arrayPush(newArr, arr[i]);
     }
@@ -33,7 +33,7 @@ export const arrayUnshift = (originaArr, newElement) => {
 
 export const arrayShift = (arr) => {
     const newArr = [];
-    if (arrayLength(arr) < 2) return undefined;
+    if (arrayLength(arr) < 1) return undefined;
     for (let i = 1; i < arrayLength(arr); i++) {
         arrayPush(newArr, arr[i]);
     }

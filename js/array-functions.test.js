@@ -1,4 +1,10 @@
-import { arrayLength, arrayPush, arrayPop } from './array-functions';
+import {
+    arrayLength,
+    arrayPush,
+    arrayPop,
+    arrayUnshift,
+    arrayShift,
+} from './array-functions';
 
 describe('Given arrayLength function', () => {
     const arrCase = [
@@ -38,10 +44,39 @@ describe('Given arrayPop function', () => {
             [3, 8, 5],
         ],
         [[], undefined],
-        [['1'], undefined],
+        [['1'], []],
     ];
     test.each(arrCase)(`The result of %p should be %p`, (arr, expected) => {
         const result = arrayPop(arr);
+        expect(result).toStrictEqual(expected);
+    });
+});
+
+describe('Given arrayUnshift function', () => {
+    const arrCase = [
+        [[3, 8], 5, [5, 3, 8]],
+        [[3, 8, 5, 6], 'x', ['x', 3, 8, 5, 6]],
+    ];
+    test.each(arrCase)(
+        `The result of %p + %p should be %p`,
+        (originaArr, newElement, expected) => {
+            const result = arrayUnshift(originaArr, newElement);
+            expect(result).toStrictEqual(expected);
+        }
+    );
+});
+
+describe('Given arrayShift function', () => {
+    const arrCase = [
+        [
+            [3, 8, 5, 6],
+            [8, 5, 6],
+        ],
+        [[], undefined],
+        [['1'], []],
+    ];
+    test.each(arrCase)(`The result of %p should be %p`, (arr, expected) => {
+        const result = arrayShift(arr);
         expect(result).toStrictEqual(expected);
     });
 });

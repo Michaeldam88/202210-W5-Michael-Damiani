@@ -9,9 +9,12 @@ export const arrayLength = (arr) => {
     return length;
 };
 
-export const arrayPush = (originaArr, newElement) => {
-    originaArr[arrayLength(originaArr)] = newElement;
-    return originaArr;
+export const arrayPush = (originaArr, ...newElement) => {
+    for (let i = 0; i < arrayLength(newElement); i++) {
+        originaArr[arrayLength(originaArr)] = newElement[i];
+    }
+
+    return arrayLength(originaArr);
 };
 
 export const arrayPop = (arr) => {

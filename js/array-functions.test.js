@@ -26,18 +26,22 @@ describe('Given arrayLength function', () => {
 });
 
 describe('Given arrayPush function', () => {
-    const arrCase = [
-        [[3, 8], 5, [3, 8, 5]],
-        [[3, 8, 5], 6, [3, 8, 5, 6]],
-        [[3, 8, 5, 6], 'x', [3, 8, 5, 6, 'x']],
-    ];
-    test.each(arrCase)(
-        `The result of %p + %p should be %p`,
-        (originaArr, newElement, expected) => {
-            const result = arrayPush(originaArr, newElement);
-            expect(result).toStrictEqual(expected);
-        }
-    );
+    test(`The return of [3, 8] + 5 should be 3`, () => {
+        const result = arrayPush([3, 8], 5);
+        expect(result).toBe(3);
+    });
+
+    test(`The return of [3, 8] + 5, 6 should be 4`, () => {
+        const result = arrayPush([3, 8], 5, 6);
+        expect(result).toBe(4);
+    });
+
+    test(`The result of [3, 8] + 5, 6 should be [3, 8, 5, 6]`, () => {
+        const originalArr = [3, 8];
+        arrayPush(originalArr, 5, 6);
+        const result = originalArr;
+        expect(result).toStrictEqual([3, 8, 5, 6]);
+    });
 });
 
 describe('Given arrayPop function', () => {
@@ -56,17 +60,22 @@ describe('Given arrayPop function', () => {
 });
 
 describe('Given arrayUnshift function', () => {
-    const arrCase = [
-        [[3, 8], 5, [5, 3, 8]],
-        [[3, 8, 5, 6], 'x', ['x', 3, 8, 5, 6]],
-    ];
-    test.each(arrCase)(
-        `The result of %p + %p should be %p`,
-        (originaArr, newElement, expected) => {
-            const result = arrayUnshift(originaArr, newElement);
-            expect(result).toStrictEqual(expected);
-        }
-    );
+    test(`The return of [3, 8] + 5 should be 3`, () => {
+        const result = arrayUnshift([3, 8], 5);
+        expect(result).toBe(3);
+    });
+
+    test(`The return of [3, 8] + 5, 6 should be 4`, () => {
+        const result = arrayUnshift([3, 8], 5, 6);
+        expect(result).toBe(4);
+    });
+
+    test(`The result of [3, 8] + 5, 6 should be [3, 8, 5, 6]`, () => {
+        const originalArr = [3, 8];
+        arrayUnshift(originalArr, 5, 6);
+        const result = originalArr;
+        expect(result).toStrictEqual([5, 6, 3, 8]);
+    });
 });
 
 describe('Given arrayShift function', () => {
@@ -98,6 +107,23 @@ describe('Given arraySome function', () => {
         `The result of %p + %p should be %p`,
         (originaArr, checkFunction, expected) => {
             const result = arraySome(originaArr, checkFunction);
+            expect(result).toBe(expected);
+        }
+    );
+
+    const checkFunction2 = (element) => {
+        return element > 3;
+    };
+    const arrCase2 = [
+        [[3, 8, 'x'], checkFunction2, true],
+        [[], checkFunction2, false],
+        [[3, 2, 1], checkFunction2, false],
+    ];
+
+    test.each(arrCase2)(
+        `The result of %p + %p should be %p`,
+        (originaArr, checkFunction2, expected) => {
+            const result = arraySome(originaArr, checkFunction2);
             expect(result).toBe(expected);
         }
     );

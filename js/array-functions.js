@@ -57,3 +57,15 @@ export const arraySome = (arr, valueToCheck) => {
     }
     return false;
 };
+
+export const arrayEvery = (arr, valueToCheck) => {
+    if (arrayLength(arr) < 1) return true;
+    if (typeof valueToCheck !== 'function') {
+        throw new Error(`ERROR: ${valueToCheck} is not a function`);
+    }
+
+    for (let i = 0; i < arrayLength(arr); i++) {
+        if (!valueToCheck(arr[i])) return false;
+    }
+    return true;
+};

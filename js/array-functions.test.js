@@ -5,6 +5,7 @@ import {
     arrayUnshift,
     arrayShift,
     arraySome,
+    arrayEvery,
 } from './array-functions';
 
 describe('Given arrayLength function', () => {
@@ -111,26 +112,35 @@ describe('Given arraySome function', () => {
         }
     );
 
-    const checkFunction2 = (element) => {
+    test(`The result of [3, 8, 'x'] + 3 should throw an error`, () => {
+        function checkFunction() {
+            arraySome([3, 8, 'x'], 3);
+        }
+        expect(checkFunction).toThrow();
+    });
+});
+
+describe('Given arrayEvery function', () => {
+    const checkFunction = (element) => {
         return element > 3;
     };
-    const arrCase2 = [
-        [[3, 8, 'x'], checkFunction2, true],
-        [[], checkFunction2, false],
-        [[3, 2, 1], checkFunction2, false],
+    const arrCase = [
+        [[4, 8, 6], checkFunction, true],
+        [[], checkFunction, true],
+        [[3, 5, 7], checkFunction, false],
     ];
 
-    test.each(arrCase2)(
+    test.each(arrCase)(
         `The result of %p + %p should be %p`,
-        (originaArr, checkFunction2, expected) => {
-            const result = arraySome(originaArr, checkFunction2);
+        (originaArr, checkFunction, expected) => {
+            const result = arrayEvery(originaArr, checkFunction);
             expect(result).toBe(expected);
         }
     );
 
     test(`The result of [3, 8, 'x'] + 3 should throw an error`, () => {
         function checkFunction() {
-            arraySome([3, 8, 'x'], 3);
+            arrayEvery([3, 8, 'x'], 3);
         }
         expect(checkFunction).toThrow();
     });

@@ -9,12 +9,12 @@ export const arrayLength = (arr) => {
     return length;
 };
 
-export const arrayPush = (originaArr, ...newElement) => {
+export const arrayPush = (originalArr, ...newElement) => {
     for (let i = 0; i < arrayLength(newElement); i++) {
-        originaArr[arrayLength(originaArr)] = newElement[i];
+        originalArr[arrayLength(originalArr)] = newElement[i];
     }
 
-    return arrayLength(originaArr);
+    return arrayLength(originalArr);
 };
 
 export const arrayPop = (arr) => {
@@ -26,15 +26,15 @@ export const arrayPop = (arr) => {
     return newArr;
 };
 
-export const arrayUnshift = (originaArr, ...newElement) => {
-    for (let i = arrayLength(originaArr) - 1; i >= 0; i--) {
-        originaArr[i + arrayLength(newElement)] = originaArr[i];
+export const arrayUnshift = (originalArr, ...newElement) => {
+    for (let i = arrayLength(originalArr) - 1; i >= 0; i--) {
+        originalArr[i + arrayLength(newElement)] = originalArr[i];
     }
     for (let i = 0; i < arrayLength(newElement); i++) {
-        originaArr[i] = newElement[i];
+        originalArr[i] = newElement[i];
     }
 
-    return arrayLength(originaArr);
+    return arrayLength(originalArr);
 };
 
 export const arrayShift = (arr) => {
@@ -46,76 +46,76 @@ export const arrayShift = (arr) => {
     return newArr;
 };
 
-export const arraySome = (arr, valueToCheck) => {
+export const arraySome = (arr, functionToCheck) => {
     if (arrayLength(arr) < 1) return false;
-    if (typeof valueToCheck !== 'function') {
-        throw new Error(`ERROR: ${valueToCheck} is not a function`);
+    if (typeof functionToCheck !== 'function') {
+        throw new Error(`ERROR: ${functionToCheck} is not a function`);
     }
 
     for (let i = 0; i < arrayLength(arr); i++) {
-        if (valueToCheck(arr[i])) return true;
+        if (functionToCheck(arr[i])) return true;
     }
     return false;
 };
 
-export const arrayEvery = (arr, valueToCheck) => {
+export const arrayEvery = (arr, functionToCheck) => {
     if (arrayLength(arr) < 1) return true;
-    if (typeof valueToCheck !== 'function') {
-        throw new Error(`ERROR: ${valueToCheck} is not a function`);
+    if (typeof functionToCheck !== 'function') {
+        throw new Error(`ERROR: ${functionToCheck} is not a function`);
     }
 
     for (let i = 0; i < arrayLength(arr); i++) {
-        if (!valueToCheck(arr[i])) return false;
+        if (!functionToCheck(arr[i])) return false;
     }
     return true;
 };
 
-export const arrayFind = (arr, valueToCheck) => {
-    if (typeof valueToCheck !== 'function') {
-        throw new Error(`ERROR: ${valueToCheck} is not a function`);
+export const arrayFind = (arr, functionToCheck) => {
+    if (typeof functionToCheck !== 'function') {
+        throw new Error(`ERROR: ${functionToCheck} is not a function`);
     }
 
     for (let i = 0; i < arrayLength(arr); i++) {
-        if (valueToCheck(arr[i])) return arr[i];
+        if (functionToCheck(arr[i])) return arr[i];
     }
     return undefined;
 };
 
-export const arrayFilter = (arr, valueToCheck) => {
-    if (typeof valueToCheck !== 'function') {
-        throw new Error(`ERROR: ${valueToCheck} is not a function`);
+export const arrayFilter = (arr, functionToCheck) => {
+    if (typeof functionToCheck !== 'function') {
+        throw new Error(`ERROR: ${functionToCheck} is not a function`);
     }
 
     const resultArr = [];
 
     for (let i = 0; i < arrayLength(arr); i++) {
-        if (valueToCheck(arr[i])) {
+        if (functionToCheck(arr[i])) {
             arrayPush(resultArr, arr[i]);
         }
     }
     return resultArr;
 };
 
-export const arrayMap = (arr, valueToCheck) => {
-    if (typeof valueToCheck !== 'function') {
-        throw new Error(`ERROR: ${valueToCheck} is not a function`);
+export const arrayMap = (arr, functionToCheck) => {
+    if (typeof functionToCheck !== 'function') {
+        throw new Error(`ERROR: ${functionToCheck} is not a function`);
     }
 
     const resultArr = [];
 
     for (let i = 0; i < arrayLength(arr); i++) {
-        arrayPush(resultArr, valueToCheck(arr[i]));
+        arrayPush(resultArr, functionToCheck(arr[i]));
     }
     return resultArr;
 };
 
-export const arrayFindIndex = (arr, valueToCheck) => {
-    if (typeof valueToCheck !== 'function') {
-        throw new Error(`ERROR: ${valueToCheck} is not a function`);
+export const arrayFindIndex = (arr, functionToCheck) => {
+    if (typeof functionToCheck !== 'function') {
+        throw new Error(`ERROR: ${functionToCheck} is not a function`);
     }
 
     for (let i = 0; i < arrayLength(arr); i++) {
-        if (valueToCheck(arr[i])) return i;
+        if (functionToCheck(arr[i])) return i;
     }
     return -1;
 };
@@ -132,6 +132,17 @@ export const arrayIndexOf = (arr, valueToCheck) => {
         if (arr[i] === valueToCheck) return i;
     }
     return -1;
+};
+
+export const arrayReduce = (arr, functionToExecute, initialValue) => {
+    if (typeof functionToExecute !== 'function') {
+        throw new Error(`ERROR: ${functionToExecute} is not a function`);
+    }
+    let accumulator = initialValue;
+    for (let i = 0; i < arrayLength(arr); i++) {
+        accumulator = functionToExecute(accumulator, arr[i]);
+    }
+    return accumulator;
 };
 
 export const arrayJoin = (arr, separator) => {

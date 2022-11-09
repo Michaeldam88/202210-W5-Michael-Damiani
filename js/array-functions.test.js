@@ -13,6 +13,7 @@ import {
     arrayIncludes,
     arrayIndexOf,
     arrayJoin,
+    arrayReduce,
 } from './array-functions';
 
 describe('Given arrayLength function', () => {
@@ -287,6 +288,32 @@ describe('Given arrayIndexOf function', () => {
             expect(result).toStrictEqual(expected);
         }
     );
+});
+
+describe('Given arrayReduce function', () => {
+    const checkFunction = (previousValue, currentValue) => {
+        return previousValue + currentValue;
+    };
+    const arrCase = [
+        [[4, 12, 6], checkFunction, 0, 22],
+        [['a', 'b', 'c'], checkFunction, '', 'abc'],
+        [['a', 'b', 'c'], checkFunction, undefined, 'undefinedabc'],
+    ];
+
+    test.each(arrCase)(
+        `The result of %p with the %p and initial value of %p should be %p`,
+        (originaArr, checkFunction, initialValue, expected) => {
+            const result = arrayReduce(originaArr, checkFunction, initialValue);
+            expect(result).toStrictEqual(expected);
+        }
+    );
+
+    test(`The result of [3, 8, 'x'] + 3 and initial value of "" should throw an error`, () => {
+        function checkFunction() {
+            arrayReduce([3, 8, 'x'], 3, '');
+        }
+        expect(checkFunction).toThrow();
+    });
 });
 
 describe('Given arrayJoin function', () => {

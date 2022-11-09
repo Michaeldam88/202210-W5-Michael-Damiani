@@ -119,3 +119,10 @@ export const arrayFindIndex = (arr, valueToCheck) => {
     }
     return -1;
 };
+
+export const arrayIncludes = (arr, valueToCheck) => {
+    for (let i = 0; i < arrayLength(arr); i++) {
+        if (arr[i] === valueToCheck) return true;
+    }
+    return false;
+};

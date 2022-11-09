@@ -10,6 +10,7 @@ import {
     arrayFilter,
     arrayMap,
     arrayFindIndex,
+    arrayIncludes,
 } from './array-functions';
 
 describe('Given arrayLength function', () => {
@@ -24,24 +25,24 @@ describe('Given arrayLength function', () => {
         //test not passed
         //[[{ undefined }], 1]
     ];
-    test.each(arrCase)(`The result of %p should be %i`, (arr, expected) => {
+    test.each(arrCase)(`The length of %p should be %i`, (arr, expected) => {
         const result = arrayLength(arr);
         expect(result).toBe(expected);
     });
 });
 
 describe('Given arrayPush function', () => {
-    test(`The return of [3, 8] + 5 should be 3`, () => {
+    test(`The length returned of [3, 8] + 5 should be 3`, () => {
         const result = arrayPush([3, 8], 5);
         expect(result).toBe(3);
     });
 
-    test(`The return of [3, 8] + 5, 6 should be 4`, () => {
+    test(`The length returned of [3, 8] + 5, 6 should be 4`, () => {
         const result = arrayPush([3, 8], 5, 6);
         expect(result).toBe(4);
     });
 
-    test(`The result of [3, 8] + 5, 6 should be [3, 8, 5, 6]`, () => {
+    test(`The original array [3, 8] + 5, 6 should now be [3, 8, 5, 6]`, () => {
         const originalArr = [3, 8];
         arrayPush(originalArr, 5, 6);
         const result = originalArr;
@@ -58,24 +59,24 @@ describe('Given arrayPop function', () => {
         [[], undefined],
         [['1'], []],
     ];
-    test.each(arrCase)(`The result of %p should be %p`, (arr, expected) => {
+    test.each(arrCase)(`The array %p should now be %p`, (arr, expected) => {
         const result = arrayPop(arr);
         expect(result).toStrictEqual(expected);
     });
 });
 
 describe('Given arrayUnshift function', () => {
-    test(`The return of [3, 8] + 5 should be 3`, () => {
+    test(`The length returned of [3, 8] + 5 should be 3`, () => {
         const result = arrayUnshift([3, 8], 5);
         expect(result).toBe(3);
     });
 
-    test(`The return of [3, 8] + 5, 6 should be 4`, () => {
+    test(`The length returned of [3, 8] + 5, 6 should be 4`, () => {
         const result = arrayUnshift([3, 8], 5, 6);
         expect(result).toBe(4);
     });
 
-    test(`The result of [3, 8] + 5, 6 should be [3, 8, 5, 6]`, () => {
+    test(`The original array [3, 8] + 5, 6 should now be [3, 8, 5, 6]`, () => {
         const originalArr = [3, 8];
         arrayUnshift(originalArr, 5, 6);
         const result = originalArr;
@@ -92,7 +93,7 @@ describe('Given arrayShift function', () => {
         [[], undefined],
         [['1'], []],
     ];
-    test.each(arrCase)(`The result of %p should be %p`, (arr, expected) => {
+    test.each(arrCase)(`The array %p should now be %p`, (arr, expected) => {
         const result = arrayShift(arr);
         expect(result).toStrictEqual(expected);
     });
@@ -109,7 +110,7 @@ describe('Given arraySome function', () => {
     ];
 
     test.each(arrCase)(
-        `The result of %p + %p should be %p`,
+        `The result of %p with the searched value of %p should return %p`,
         (originaArr, checkFunction, expected) => {
             const result = arraySome(originaArr, checkFunction);
             expect(result).toBe(expected);
@@ -135,7 +136,7 @@ describe('Given arrayEvery function', () => {
     ];
 
     test.each(arrCase)(
-        `The result of %p + %p should be %p`,
+        `The result of %p with the searched value of %p should return %p`,
         (originaArr, checkFunction, expected) => {
             const result = arrayEvery(originaArr, checkFunction);
             expect(result).toBe(expected);
@@ -161,7 +162,7 @@ describe('Given arrayFind function', () => {
     ];
 
     test.each(arrCase)(
-        `The result of %p + %p should be %p`,
+        `The result of %p with the searched value of %p should return %p`,
         (originaArr, checkFunction, expected) => {
             const result = arrayFind(originaArr, checkFunction);
             expect(result).toBe(expected);
@@ -187,7 +188,7 @@ describe('Given arrayFilter function', () => {
     ];
 
     test.each(arrCase)(
-        `The result of %p + %p should be %p`,
+        `The result of %p with the filter of %p should return %p`,
         (originaArr, checkFunction, expected) => {
             const result = arrayFilter(originaArr, checkFunction);
             expect(result).toStrictEqual(expected);
@@ -239,7 +240,7 @@ describe('Given arrayFindIndex function', () => {
     ];
 
     test.each(arrCase)(
-        `The result of %p + %p should be %p`,
+        `The result of %p with the searched position of %p should be %p`,
         (originaArr, checkFunction, expected) => {
             const result = arrayFindIndex(originaArr, checkFunction);
             expect(result).toStrictEqual(expected);
@@ -252,4 +253,20 @@ describe('Given arrayFindIndex function', () => {
         }
         expect(checkFunction).toThrow();
     });
+});
+
+describe('Given arrayIncludes function', () => {
+    const arrCase = [
+        [[4, 12, 6], 12, true],
+        [[], 12, false],
+        [[3, 5, 7], 12, false],
+    ];
+
+    test.each(arrCase)(
+        `The result of %p with the searched value of %p should return %p`,
+        (originaArr, valueToCheck, expected) => {
+            const result = arrayIncludes(originaArr, valueToCheck);
+            expect(result).toBe(expected);
+        }
+    );
 });

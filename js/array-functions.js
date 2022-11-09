@@ -33,7 +33,7 @@ export const arrayUnshift = (originaArr, ...newElement) => {
     for (let i = 0; i < arrayLength(newElement); i++) {
         originaArr[i] = newElement[i];
     }
-    
+
     return arrayLength(originaArr);
 };
 
@@ -70,7 +70,6 @@ export const arrayEvery = (arr, valueToCheck) => {
     return true;
 };
 
-
 export const arrayFind = (arr, valueToCheck) => {
     if (typeof valueToCheck !== 'function') {
         throw new Error(`ERROR: ${valueToCheck} is not a function`);
@@ -80,4 +79,19 @@ export const arrayFind = (arr, valueToCheck) => {
         if (valueToCheck(arr[i])) return arr[i];
     }
     return undefined;
+};
+
+export const arrayFilter = (arr, valueToCheck) => {
+    if (typeof valueToCheck !== 'function') {
+        throw new Error(`ERROR: ${valueToCheck} is not a function`);
+    }
+
+    const resultArr = [];
+
+    for (let i = 0; i < arrayLength(arr); i++) {
+        if (valueToCheck(arr[i])) {
+            arrayPush(resultArr, arr[i]);
+        }
+    }
+    return resultArr;
 };

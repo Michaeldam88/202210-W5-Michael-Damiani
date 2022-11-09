@@ -7,6 +7,7 @@ import {
     arraySome,
     arrayEvery,
     arrayFind,
+    arrayFilter,
 } from './array-functions';
 
 describe('Given arrayLength function', () => {
@@ -168,6 +169,32 @@ describe('Given arrayFind function', () => {
     test(`The result of [3, 8, 'x'] + 3 should throw an error`, () => {
         function checkFunction() {
             arrayFind([3, 8, 'x'], 3);
+        }
+        expect(checkFunction).toThrow();
+    });
+});
+
+describe('Given arrayFilter function', () => {
+    const checkFunction = (element) => {
+        return element > 5;
+    };
+    const arrCase = [
+        [[4, 12, 6], checkFunction, [12, 6]],
+        [[], checkFunction, []],
+        [[3, 5, 2], checkFunction, []],
+    ];
+
+    test.each(arrCase)(
+        `The result of %p + %p should be %p`,
+        (originaArr, checkFunction, expected) => {
+            const result = arrayFilter(originaArr, checkFunction);
+            expect(result).toStrictEqual(expected);
+        }
+    );
+
+    test(`The result of [3, 8, 'x'] + 3 should throw an error`, () => {
+        function checkFunction() {
+            arrayFilter([3, 8, 'x'], 3);
         }
         expect(checkFunction).toThrow();
     });

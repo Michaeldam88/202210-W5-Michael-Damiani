@@ -95,3 +95,16 @@ export const arrayFilter = (arr, valueToCheck) => {
     }
     return resultArr;
 };
+
+export const arrayMap = (arr, valueToCheck) => {
+    if (typeof valueToCheck !== 'function') {
+        throw new Error(`ERROR: ${valueToCheck} is not a function`);
+    }
+
+    const resultArr = [];
+
+    for (let i = 0; i < arrayLength(arr); i++) {
+        arrayPush(resultArr, valueToCheck(arr[i]));
+    }
+    return resultArr;
+};

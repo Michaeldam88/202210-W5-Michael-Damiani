@@ -8,6 +8,7 @@ import {
     arrayEvery,
     arrayFind,
     arrayFilter,
+    arrayMap,
 } from './array-functions';
 
 describe('Given arrayLength function', () => {
@@ -195,6 +196,32 @@ describe('Given arrayFilter function', () => {
     test(`The result of [3, 8, 'x'] + 3 should throw an error`, () => {
         function checkFunction() {
             arrayFilter([3, 8, 'x'], 3);
+        }
+        expect(checkFunction).toThrow();
+    });
+});
+
+describe('Given arrayMap function', () => {
+    const checkFunction = (element) => {
+        return element * 2;
+    };
+    const arrCase = [
+        [[4, 12, 6], checkFunction, [8, 24, 12]],
+        [[], checkFunction, []],
+        [[3, 'a', 2], checkFunction, [6, NaN, 4]],
+    ];
+
+    test.each(arrCase)(
+        `The result of %p + %p should be %p`,
+        (originaArr, checkFunction, expected) => {
+            const result = arrayMap(originaArr, checkFunction);
+            expect(result).toStrictEqual(expected);
+        }
+    );
+
+    test(`The result of [3, 8, 'x'] + 3 should throw an error`, () => {
+        function checkFunction() {
+            arrayMap([3, 8, 'x'], 3);
         }
         expect(checkFunction).toThrow();
     });

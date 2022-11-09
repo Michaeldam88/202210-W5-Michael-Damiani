@@ -108,3 +108,14 @@ export const arrayMap = (arr, valueToCheck) => {
     }
     return resultArr;
 };
+
+export const arrayFindIndex = (arr, valueToCheck) => {
+    if (typeof valueToCheck !== 'function') {
+        throw new Error(`ERROR: ${valueToCheck} is not a function`);
+    }
+
+    for (let i = 0; i < arrayLength(arr); i++) {
+        if (valueToCheck(arr[i])) return i;
+    }
+    return -1;
+};

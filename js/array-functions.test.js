@@ -9,6 +9,7 @@ import {
     arrayFind,
     arrayFilter,
     arrayMap,
+    arrayFindIndex,
 } from './array-functions';
 
 describe('Given arrayLength function', () => {
@@ -222,6 +223,32 @@ describe('Given arrayMap function', () => {
     test(`The result of [3, 8, 'x'] + 3 should throw an error`, () => {
         function checkFunction() {
             arrayMap([3, 8, 'x'], 3);
+        }
+        expect(checkFunction).toThrow();
+    });
+});
+
+describe('Given arrayFindIndex function', () => {
+    const checkFunction = (element) => {
+        return element > 5;
+    };
+    const arrCase = [
+        [[4, 12, 6], checkFunction, 1],
+        [[], checkFunction, -1],
+        [[3, 5, 2], checkFunction, -1],
+    ];
+
+    test.each(arrCase)(
+        `The result of %p + %p should be %p`,
+        (originaArr, checkFunction, expected) => {
+            const result = arrayFindIndex(originaArr, checkFunction);
+            expect(result).toStrictEqual(expected);
+        }
+    );
+
+    test(`The result of [3, 8, 'x'] + 3 should throw an error`, () => {
+        function checkFunction() {
+            arrayFindIndex([3, 8, 'x'], 3);
         }
         expect(checkFunction).toThrow();
     });

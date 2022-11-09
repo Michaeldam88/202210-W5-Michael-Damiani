@@ -6,6 +6,7 @@ import {
     arrayShift,
     arraySome,
     arrayEvery,
+    arrayFind,
 } from './array-functions';
 
 describe('Given arrayLength function', () => {
@@ -141,6 +142,32 @@ describe('Given arrayEvery function', () => {
     test(`The result of [3, 8, 'x'] + 3 should throw an error`, () => {
         function checkFunction() {
             arrayEvery([3, 8, 'x'], 3);
+        }
+        expect(checkFunction).toThrow();
+    });
+});
+
+describe('Given arrayFind function', () => {
+    const checkFunction = (element) => {
+        return element > 10;
+    };
+    const arrCase = [
+        [[4, 12, 6], checkFunction, 12],
+        [[], checkFunction, undefined],
+        [[3, 5, 7], checkFunction, undefined],
+    ];
+
+    test.each(arrCase)(
+        `The result of %p + %p should be %p`,
+        (originaArr, checkFunction, expected) => {
+            const result = arrayFind(originaArr, checkFunction);
+            expect(result).toBe(expected);
+        }
+    );
+
+    test(`The result of [3, 8, 'x'] + 3 should throw an error`, () => {
+        function checkFunction() {
+            arrayFind([3, 8, 'x'], 3);
         }
         expect(checkFunction).toThrow();
     });

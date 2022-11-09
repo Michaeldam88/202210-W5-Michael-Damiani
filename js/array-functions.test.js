@@ -11,6 +11,7 @@ import {
     arrayMap,
     arrayFindIndex,
     arrayIncludes,
+    arrayIndexOf,
 } from './array-functions';
 
 describe('Given arrayLength function', () => {
@@ -267,6 +268,22 @@ describe('Given arrayIncludes function', () => {
         (originaArr, valueToCheck, expected) => {
             const result = arrayIncludes(originaArr, valueToCheck);
             expect(result).toBe(expected);
+        }
+    );
+});
+
+describe('Given arrayIndexOf function', () => {
+    const arrCase = [
+        [[4, 12, 6], 12, 1],
+        [[], 12, -1],
+        [[3, 5, 2], 12, -1],
+    ];
+
+    test.each(arrCase)(
+        `The result of %p with the searched position of %p should be %p`,
+        (originaArr, valueToCheck, expected) => {
+            const result = arrayIndexOf(originaArr, valueToCheck);
+            expect(result).toStrictEqual(expected);
         }
     );
 });

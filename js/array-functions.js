@@ -126,3 +126,10 @@ export const arrayIncludes = (arr, valueToCheck) => {
     }
     return false;
 };
+
+export const arrayIndexOf = (arr, valueToCheck) => {
+    for (let i = 0; i < arrayLength(arr); i++) {
+        if (arr[i] === valueToCheck) return i;
+    }
+    return -1;
+};

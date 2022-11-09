@@ -12,6 +12,7 @@ import {
     arrayFindIndex,
     arrayIncludes,
     arrayIndexOf,
+    arrayJoin,
 } from './array-functions';
 
 describe('Given arrayLength function', () => {
@@ -283,6 +284,23 @@ describe('Given arrayIndexOf function', () => {
         `The result of %p with the searched position of %p should be %p`,
         (originaArr, valueToCheck, expected) => {
             const result = arrayIndexOf(originaArr, valueToCheck);
+            expect(result).toStrictEqual(expected);
+        }
+    );
+});
+
+describe('Given arrayJoin function', () => {
+    const arrCase = [
+        [[4, 12, 6], '-', '4-12-6'],
+        [[3], '-', '3'],
+        [[], '-', ''],
+        [[3, 5, 2], '', '3,5,2'],
+    ];
+
+    test.each(arrCase)(
+        `The result of %p with the separator of %p should return this string %p`,
+        (originaArr, separator, expected) => {
+            const result = arrayJoin(originaArr, separator);
             expect(result).toStrictEqual(expected);
         }
     );

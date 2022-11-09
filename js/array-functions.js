@@ -133,3 +133,15 @@ export const arrayIndexOf = (arr, valueToCheck) => {
     }
     return -1;
 };
+
+export const arrayJoin = (arr, separator) => {
+    let stringResult = '';
+    if (separator === '') separator = ',';
+    for (let i = 0; i < arrayLength(arr); i++) {
+        if (i === arrayLength(arr) - 1) stringResult += arr[i];
+        else {
+            stringResult += arr[i] + separator;
+        }
+    }
+    return stringResult;
+};
